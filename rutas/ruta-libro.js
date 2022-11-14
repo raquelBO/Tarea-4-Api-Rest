@@ -3,8 +3,13 @@ const router = Router();
 const tablaLibro = require('./../baseDatos/libro-bd');
 
 router.get("/", async (peticion, respuesta) => {
+    const autorizacion = peticion.headers.authorization;
+    console.log(autorizacion);
     try {
         const listaLibro = await tablaLibro.select();
+        /*setTimeout(() => {
+            respuesta.json(listaLibro);
+        }, 3000);*/
         respuesta.json(listaLibro);
     } catch (err) {
         respuesta.status(500).send(err.message);
